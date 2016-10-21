@@ -46,4 +46,5 @@ air.plotValueAlongAlpha("red")
 print(len(air.aArray))
 print(len(water.aArray))
 
+plt.savefig("strings.png")
 plt.show()
