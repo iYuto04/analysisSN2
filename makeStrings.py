@@ -53,30 +53,61 @@ class interpData:
             else:
                 alpha, value = map(float,readLine.split())
                 self.valueArray.append(value)
-        print(str(self.fileNameOfValue) + "  " + str(len(self.valueArray)))
+        # print(str(self.fileNameOfValue) + "  " + str(len(self.valueArray)))
 
     def plotValueAlongRC(self,colorName):
         for i in range(len(self.abArray)):
             self.RCArray.append(self.abArray[i] - self.bcArray[i])
         plt.plot(self.RCArray,self.valueArray, linewidth = 1, color = colorName)
 
+class AirData(interpData):
+    def get_potential(self):
+        import potentialOfSN2
+        for i in range(len(self.abArray)):
+            self.valueArray.append(potentialOfSN2.getPotential(self.abArray[i], self.bcArray[i]))
+
+class OnlySolventFreeEnergy(AirData):
+    def readValue(self):
+        self.get_potential()
+        f = open(self.fileNameOfValue, "r")
+        i = 0
+        while True:
+            readLine = f.readline()
+            if readLine == "":
+                break
+            else:
+                alpha, value = map(float, readLine.split())
+                self.valueArray[i] = value - self.valueArray[i]
+                i += 1
 
 
-water = interpData("interpNewData.dat","alongStringWater.dat")
-air = interpData("interpAir.dat","alongStringAir.dat")
 
-water.readValue()
-water.plotValueAlongRC("green")
-air.readValue()
-air.plotValueAlongRC("red")
-plt.savefig("valueAlongRC.png")
-plt.show()
 
-water.plotStringAlongAlpha("green")
-air.plotStringAlongAlpha("red")
-plt.show()
+if __name__ == "__main__":
+    # air = interpData("interpAir.dat","alongStringAir.dat")
+    air = AirData("interpNewData.dat", "alongStringWater.dat")
+    air.get_potential()
+    air.plotValueAlongRC("red")
 
-# print(len(air.aArray))
-# print(len(water.aArray))
+    water = interpData("interpNewData.dat","alongStringWater.dat")
+    water.readValue()
+    water.plotValueAlongRC("green")
 
-# plt.savefig("strings.png")
+    sfe = OnlySolventFreeEnergy("interpNewData.dat", "alongStringWater.dat")
+    sfe.readValue()
+    sfe.plotValueAlongRC("blue")
+    # sfe.plotValueAlongRC("blue")
+    # air.readValue()
+    # air.plotValueAlongRC("red")
+    # plt.savefig("valueAlongRC.png")
+    plt.savefig("eachValue.png")
+    plt.show()
+    #
+    # water.plotStringAlongAlpha("green")
+    # air.plotStringAlongAlpha("red")
+    # plt.show()
+
+    # print(len(air.aArray))
+    # print(len(water.aArray))
+
+    # plt.savefig("strings.png")
