@@ -55,10 +55,11 @@ class interpData:
                 self.valueArray.append(value)
         # print(str(self.fileNameOfValue) + "  " + str(len(self.valueArray)))
 
-    def plotValueAlongRC(self,colorName):
+    def plotValueAlongRC(self,colorName, line_style="-",label=None):
         for i in range(len(self.abArray)):
             self.RCArray.append(self.abArray[i] - self.bcArray[i])
-        plt.plot(self.RCArray,self.valueArray, linewidth = 1, color = colorName)
+        plt.plot(self.RCArray,self.valueArray, linewidth = 1, color = colorName, linestyle=line_style,label=label)
+        plt.legend()
 
 class AirData(interpData):
     def get_potential(self):
@@ -87,15 +88,15 @@ if __name__ == "__main__":
     # air = interpData("interpAir.dat","alongStringAir.dat")
     air = AirData("interpNewData.dat", "alongStringWater.dat")
     air.get_potential()
-    air.plotValueAlongRC("red")
+    air.plotValueAlongRC("red",label="Gas-phase potential")
 
     water = interpData("interpNewData.dat","alongStringWater.dat")
     water.readValue()
-    water.plotValueAlongRC("green")
+    water.plotValueAlongRC("green",label="total free energy")
 
     sfe = OnlySolventFreeEnergy("interpNewData.dat", "alongStringWater.dat")
     sfe.readValue()
-    sfe.plotValueAlongRC("blue")
+    sfe.plotValueAlongRC("blue", label="solvent contribution")
     # sfe.plotValueAlongRC("blue")
     # air.readValue()
     # air.plotValueAlongRC("red")
