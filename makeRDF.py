@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import copy
 
 '''
 Cl^- + CH3Cl
@@ -41,26 +42,38 @@ class makeRDF:
             self.Cl2_H2_array.append(Cl2_H2)
 
 
-    def plot(self,solute="methan",line_style = "-"):
+    def plot(self,solute="methan",solvent="O",line_style = "-",color=None):
         if solute == "methan":
             plt.xlim(0,15)
-            plt.title(solute)
-            plt.plot(self.r_array, self.meth_O_array,label="O", linestyle=line_style)
-            plt.plot(self.r_array, self.meth_H1_array, label="H", linestyle=line_style)
+            # plt.title(solute)
+            if solvent=="O":
+                plt.plot(self.r_array, self.meth_O_array,label=solute + "-" + solvent, linestyle=line_style,color = color)
+            elif solvent=="H":
+                plt.plot(self.r_array, self.meth_H1_array, label=solute + "-" + solvent, linestyle=line_style,color = color)
+            else:
+                print("please input \"O\" or \"H\"")
             plt.legend()
             # plt.show()
         elif solute == "Cl1":
             plt.xlim(0, 15)
-            plt.title(solute)
-            plt.plot(self.r_array, self.Cl1_O_array, label="O", linestyle=line_style)
-            plt.plot(self.r_array, self.Cl1_H1_array, label="H", linestyle=line_style)
+            # plt.title(solute)
+            if solvent == "O":
+                plt.plot(self.r_array, self.Cl1_O_array, label=solute + "-" + solvent, linestyle=line_style,color = color)
+            elif solvent == "H":
+                plt.plot(self.r_array, self.Cl1_H1_array, label=solute + "-" + solvent, linestyle=line_style,color = color)
+            else:
+                print("please input \"O\" or \"H\"")
             plt.legend()
             # plt.show()
         elif solute == "Cl2":
             plt.xlim(0, 15)
-            plt.title(solute)
-            plt.plot(self.r_array, self.Cl2_O_array, label="O", linestyle=line_style)
-            plt.plot(self.r_array, self.Cl2_H1_array, label="H", linestyle=line_style)
+            # plt.title(solute)
+            if solvent == "O":
+                plt.plot(self.r_array, self.Cl2_O_array, label=solute + "-" + solvent, linestyle=line_style,color = color)
+            elif solvent == "H":
+                plt.plot(self.r_array, self.Cl2_H1_array, label=solute + "-" + solvent, linestyle=line_style,color = color)
+            else:
+                print("please input \"O\" or \"H\"")
             plt.legend()
             # plt.show()
         else:
@@ -68,13 +81,23 @@ class makeRDF:
         return plt
 
 if __name__ == "__main__":
-    saddle = makeRDF("gr_saddle.mat")
-    saddle.input_file()
-    saddle.plot(solute="Cl1")
+    # saddle = makeRDF("gr_saddle.mat")
+    # saddle.input_file()
+    # saddle.plot(solute="methan", solvent="O", color="orange", line_style="-")
+    # saddle.plot(solute="methan", solvent="H", color="orange", line_style="--")
+    # saddle.plot(solute="Cl1", solvent="O", color="blue", line_style="-")
+    # saddle.plot(solute="Cl1", solvent="H", color="blue", line_style="--")
+    # saddle.plot(solute="Cl2", solvent="O", color="green", line_style="-")
+    # saddle.plot(solute="Cl2", solvent="H", color="green", line_style="--")
 
-    # edge = makeRDF("gr_edge.mat")
-    # edge.input_file()
-    # edge.plot(solute="Cl2",line_style="-")
+    stable = makeRDF("gr_edge.mat")
+    stable.input_file()
+    stable.plot(solute="methan", solvent="O", color="orange", line_style="-")
+    stable.plot(solute="methan", solvent="H", color="orange", line_style="--")
+    stable.plot(solute="Cl1", solvent="O", color="blue", line_style="-")
+    stable.plot(solute="Cl1", solvent="H", color="blue", line_style="--")
+    stable.plot(solute="Cl2", solvent="O", color="green", line_style="-")
+    stable.plot(solute="Cl2", solvent="H", color="green", line_style="--")
 
-    plt.savefig("Cl1_saddle_RDF.png")
+    plt.savefig("all_edge_RDF.eps")
     plt.show()
