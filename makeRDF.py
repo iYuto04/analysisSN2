@@ -1,5 +1,11 @@
 import matplotlib.pyplot as plt
 
+'''
+Cl^- + CH3Cl
+Cl1がイオン化
+Cl2がCH3Clの一部
+'''
+
 class makeRDF:
     def __init__(self, file_name):
         self.file_name = file_name
