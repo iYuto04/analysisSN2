@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+
 class makeRDF:
     def __init__(self, file_name):
         self.file_name = file_name
@@ -38,21 +39,21 @@ class makeRDF:
         if solute == "methan":
             plt.xlim(0,15)
             plt.title(solute)
-            # plt.plot(self.r_array, self.meth_O_array,label="O", linestyle=line_style)
+            plt.plot(self.r_array, self.meth_O_array,label="O", linestyle=line_style)
             plt.plot(self.r_array, self.meth_H1_array, label="H", linestyle=line_style)
             plt.legend()
             # plt.show()
         elif solute == "Cl1":
             plt.xlim(0, 15)
             plt.title(solute)
-            # plt.plot(self.r_array, self.Cl1_O_array, label="O", linestyle=line_style)
+            plt.plot(self.r_array, self.Cl1_O_array, label="O", linestyle=line_style)
             plt.plot(self.r_array, self.Cl1_H1_array, label="H", linestyle=line_style)
             plt.legend()
             # plt.show()
         elif solute == "Cl2":
             plt.xlim(0, 15)
             plt.title(solute)
-            # plt.plot(self.r_array, self.Cl2_O_array, label="O", linestyle=line_style)
+            plt.plot(self.r_array, self.Cl2_O_array, label="O", linestyle=line_style)
             plt.plot(self.r_array, self.Cl2_H1_array, label="H", linestyle=line_style)
             plt.legend()
             # plt.show()
@@ -63,10 +64,11 @@ class makeRDF:
 if __name__ == "__main__":
     saddle = makeRDF("gr_saddle.mat")
     saddle.input_file()
-    saddle.plot(solute="methan")
+    saddle.plot(solute="Cl1")
 
-    edge = makeRDF("gr_edge.mat")
-    edge.input_file()
-    edge.plot(solute="methan",line_style="--")
-    plt.savefig("methan_H_RDF.png")
+    # edge = makeRDF("gr_edge.mat")
+    # edge.input_file()
+    # edge.plot(solute="Cl2",line_style="-")
+
+    plt.savefig("Cl1_saddle_RDF.png")
     plt.show()
