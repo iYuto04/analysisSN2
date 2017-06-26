@@ -43,9 +43,9 @@ class makeRDF:
 
 
     def plot(self,solute="methan",solvent="O",line_style = "-",color=None):
+        plt.xlim(0, 12)
+        plt.ylim(0, 3.5)
         if solute == "methan":
-            plt.xlim(0,15)
-            # plt.title(solute)
             if solvent=="O":
                 plt.plot(self.r_array, self.meth_O_array,label=solute + "-" + solvent, linestyle=line_style,color = color)
             elif solvent=="H":
@@ -55,8 +55,6 @@ class makeRDF:
             plt.legend()
             # plt.show()
         elif solute == "Cl1":
-            plt.xlim(0, 15)
-            # plt.title(solute)
             if solvent == "O":
                 plt.plot(self.r_array, self.Cl1_O_array, label=solute + "-" + solvent, linestyle=line_style,color = color)
             elif solvent == "H":
@@ -66,8 +64,6 @@ class makeRDF:
             plt.legend()
             # plt.show()
         elif solute == "Cl2":
-            plt.xlim(0, 15)
-            # plt.title(solute)
             if solvent == "O":
                 plt.plot(self.r_array, self.Cl2_O_array, label=solute + "-" + solvent, linestyle=line_style,color = color)
             elif solvent == "H":
@@ -81,23 +77,23 @@ class makeRDF:
         return plt
 
 if __name__ == "__main__":
-    # saddle = makeRDF("gr_saddle.mat")
-    # saddle.input_file()
-    # saddle.plot(solute="methan", solvent="O", color="orange", line_style="-")
-    # saddle.plot(solute="methan", solvent="H", color="orange", line_style="--")
-    # saddle.plot(solute="Cl1", solvent="O", color="blue", line_style="-")
-    # saddle.plot(solute="Cl1", solvent="H", color="blue", line_style="--")
-    # saddle.plot(solute="Cl2", solvent="O", color="green", line_style="-")
-    # saddle.plot(solute="Cl2", solvent="H", color="green", line_style="--")
+    saddle = makeRDF("gr_saddle.mat")
+    saddle.input_file()
+    saddle.plot(solute="methan", solvent="O", color="orange", line_style="-")
+    saddle.plot(solute="methan", solvent="H", color="orange", line_style="--")
+    saddle.plot(solute="Cl1", solvent="O", color="blue", line_style="-")
+    saddle.plot(solute="Cl1", solvent="H", color="blue", line_style="--")
+    saddle.plot(solute="Cl2", solvent="O", color="green", line_style="-")
+    saddle.plot(solute="Cl2", solvent="H", color="green", line_style="--")
 
-    stable = makeRDF("gr_edge.mat")
-    stable.input_file()
-    stable.plot(solute="methan", solvent="O", color="orange", line_style="-")
-    stable.plot(solute="methan", solvent="H", color="orange", line_style="--")
-    stable.plot(solute="Cl1", solvent="O", color="blue", line_style="-")
-    stable.plot(solute="Cl1", solvent="H", color="blue", line_style="--")
-    stable.plot(solute="Cl2", solvent="O", color="green", line_style="-")
-    stable.plot(solute="Cl2", solvent="H", color="green", line_style="--")
+    # stable = makeRDF("gr_edge.mat")
+    # stable.input_file()
+    # stable.plot(solute="methan", solvent="O", color="orange", line_style="-")
+    # stable.plot(solute="methan", solvent="H", color="orange", line_style="--")
+    # stable.plot(solute="Cl1", solvent="O", color="blue", line_style="-")
+    # stable.plot(solute="Cl1", solvent="H", color="blue", line_style="--")
+    # stable.plot(solute="Cl2", solvent="O", color="green", line_style="-")
+    # stable.plot(solute="Cl2", solvent="H", color="green", line_style="--")
 
-    plt.savefig("all_edge_RDF.eps")
+    # plt.savefig("all_edge_RDF.eps",format="eps")
     plt.show()
